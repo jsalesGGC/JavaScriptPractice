@@ -1,0 +1,12 @@
+﻿body {
+}
+positionmap {position:absolute;
+             top: 0 px;
+             left: 300px;
+}
+.class2 { color:blue}
+#button1 {background-color:lightgreen}
+.class1 {color:red}
+li {
+    list-style-image: url("https://mt.googleapis.com/vt/icon/name=icons/onion/SHARED-mymaps-container-bg_4x.png,icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1676-religious-kneeling_4x.png&highlight=ff000000,006064&scale=0.5")
+}
