@@ -1,12 +1,13 @@
-﻿(async function fetchJSON()
-{
+﻿(async function fetchJSON() {
     const response = await fetch('https://ggra-development.azurewebsites.net/api')
     const data = await response.json();
 
-    var ulSuperList  = document.createElement("UL");
     var ulMentoringList = document.createElement("UL");
     var ulReligiousOrganizationsList = document.createElement("UL");
     var ulHealthCareRecoveryList = document.createElement("UL");
+    var ulOtherList = document.createElement("UL");
+
+    var ulOrganList = document.createElement("UL");
 
     for (index = 0; index < data.length; index++) {
 
@@ -16,111 +17,93 @@
 
         var itemIndexId = "listItem" + index;
         listItem.setAttribute("id", itemIndexId);
-        var classAttribute = "class1";
-        listItem.setAttribute("class", classAttribute);
+ //       var classAttribute = "class1";
+ //       listItem.setAttribute("class", classAttribute);
 
-        listItem.addEventListener("click", function (e) { boop(e.target, data, this.id); }, false);
-        ulSuperList.appendChild(listItem);
-
+   //     listItem.addEventListener("click", function (e) { boop(e.target, data, this.id); }, false);
+    //    listItem.addEventListener("click", function () { boop3(data, this.id); }, false);
+  
         var category = data[index].category;
         if (category == "mentoring services") {
-            listItem.setAttribute("class", "mentoringClass")
+            listItem.setAttribute("class", "classMentoringClass");
             //listItem.style.display = "none";
             ulMentoringList.appendChild(listItem);
         }
         else if (category == "Religious Organizations") {
+            listItem.setAttribute("class", "classReligiousOrganizations");
             ulReligiousOrganizationsList.appendChild(listItem);
         }
         else if (category == "Healthcare/Recovery") {
             ulHealthCareRecoveryList.appendChild(listItem);
+            listItem.setAttribute("class", "classHealthCareRecovery");
         }
+        else
+        {
+            ulOtherList.appendChild(listItem);
+            listItem.setAttribute("class", "classOther");
+        }
+
    
+        var liOrganList = document.createElement("LI");
+        var nameNode = document.createTextNode(data[index].name);
+        liOrganList.appendChild(nameNode);
+        var addressNode = document.createTextNode(data[index].address);
+        liOrganList.appendChild(addressNode);
+        ulOrganList.appendChild(liOrganList);
+ 
+
     }
+  //     document.appendChild(ulOrganList);
 
-    function addItemToList(list, content) {
-        var textNode = document.createTextNode(content);
-        var listItem = document.createElement("li");
-        listItem.appendChild(textNode);
-        list.appendChild(listItem);
-    }
+    var elButton1 = document.getElementById("button1");
+    elButton1.addEventListener('click', function () { myFunction3("classMentoringClass"); }, false);
 
- //   var breakItem = document.createElement("BR");
- //   ulSuperList.appendChild(breakItem);
-    document.getElementById("div1").appendChild(ulSuperList);
+    var elButton2 = document.getElementById("button2");
+    elButton2.addEventListener('click', function () { myFunction3("classReligiousOrganizations"); }, false);
 
-    var elUserName = document.getElementById("button2");
-    //   elUserName.onclick = myFunction3("mentoringClass");
-    elUserName.addEventListener('click', function () { myFunction3("mentoringClass"); }, false);
+    var elButton2 = document.getElementById("button3");
+    elButton2.addEventListener('click', function () { myFunction3("classHealthCareRecovery"); }, false);
+
+    var elButton2 = document.getElementById("button4");
+    elButton2.addEventListener('click', function () { myFunction3("classOther"); }, false);
 
     document.getElementById("mentoringServices").appendChild(ulMentoringList);
     document.getElementById("ReligiousOrganizations").appendChild(ulReligiousOrganizationsList);
     document.getElementById("HealthCareRecovery").appendChild(ulHealthCareRecoveryList);
-/*
- //   var newDiv = document.createElement("div"); 
-    var newContent = document.createTextNode("Hi there and greetings!"); 
- //   newDiv.appendChild(newContent);  
-    document.getElementById("div2").appendChild(newContent);
+    document.getElementById("Other").appendChild(ulOtherList);  
+    document.getElementById("test1").appendChild(ulOrganList);   
 
-    for (index = 0; index < data.length; index++) {
+}());   // ebd
 
-        var listItem2 = document.createElement("LI");
-        var textNode2 = document.createTextNode(data[index].name);
-        listItem2.appendChild(textNode2);
-
-        var itemIndexId = "listItem" + index;
-        listItem2.setAttribute("id", itemIndexId);
-
-        var classAttribute = "class2";
-        listItem2.setAttribute("class", classAttribute);
-
-        listItem2.addEventListener("click", function (e) { boop(e.target, data, this.id); }, false);
-        ulSuperList2.appendChild(listItem2);
-    }
-    document.getElementById("div3").appendChild(ulSuperList2);
- */   
-
-}());
-
-function myFunction3(className)
-{
- //   document.write(here1);
-    
- 
+function myFunction3(className) {
     var memberItems = document.getElementsByClassName(className);
-    if (memberItems.length > 0)
-    {
-        for (var i = 0; i < memberItems.length; i++) {
-            if (memberItems[i].style.display === "none")
-            {
-                memberItems[i].style.display = "list-item";
-            }
-            else
-            {
-                memberItems[i].style.display = "none";
-            }
-        }   // end of for
-    } // end of if
-}   // end of function
-
-function myFunction2() {
-    var memberItems = document.getElementsByClassName("mentoringClass");
-    /*
-  //  var url = "https://mt.googleapis.com/vt/icon/name=icons/onion/SHARED-mymaps-container-bg_4x.png,icons/onion/SHARED-mymaps-container_4x.png,icons/onion/1676-religious-kneeling_4x.png&highlight=ff000000,006064&scale=0.5";
-  */
     if (memberItems.length > 0) {
         for (var i = 0; i < memberItems.length; i++) {
-            if (memberItems[i].style.display === "none")
-            {
+            if (memberItems[i].style.display === "none") {
                 memberItems[i].style.display = "list-item";
             }
-            else
-            {
+            else {
                 memberItems[i].style.display = "none";
             }
         }   // end of for
     } // end of if
 }   // end of function
-
+/*
+function myFunction2() {
+    var memberItems = document.getElementsByClassName("mentoringClass");
+ 
+    if (memberItems.length > 0) {
+        for (var i = 0; i < memberItems.length; i++) {
+            if (memberItems[i].style.display === "none") {
+                memberItems[i].style.display = "list-item";
+            }
+            else {
+                memberItems[i].style.display = "none";
+            }
+        }   // end of for
+    } // end of if
+}   // end of function
+*/
 function boop(e, json, elementId) {
     var index = 0;
     if (elementId == "listItem" + 1) {
@@ -137,7 +120,7 @@ function boop(e, json, elementId) {
     unorderedList.appendChild(listItemTemp);
     e.appendChild(unorderedList);
     //listPopulator(unorderedList, json);
-  //  test("Success");
+    //  test("Success");
 }
 
 
@@ -150,36 +133,39 @@ function boop2(element, json, elementId) {
     addItemToList(unorderedList, json[index].address);
 
     element.appendChild(unorderedList);
-    test("Success");
-    /*
-    var index = 0;
-    if (elementId == "listItem" + 1) {
-        var index = 1;
-    }
-    if (elementId == "listItem" + 2) {
-        var index = 2;
-    }
+  //  test("Success");
+}
+/*
+function boop3(json, elementID)
+{
+    var index = elementId.substring(8, elementId.length);
     var unorderedList = document.createElement("ul");
-    var listItemTemp = document.createElement("li");
-    var textNode = document.createTextNode(json[index].address);
-    listItemTemp.appendChild(textNode);
+    addItemToList(unorderedList, json[index].name);
+    addItemToList(unorderedList, json[index].phoneNumber);
+    addItemToList(unorderedList, json[index].address);
+    //   document.getElementById("test1").appendChild(unorderedList); 
+    var testNode = document.create
+    document.getElementById("test1").appendChild(testNode);
+}
+*/
 
-    unorderedList.appendChild(listItemTemp);
-    e.appendChild(unorderedList);
-    //listPopulator(unorderedList, json);
-    test("Success");
-    */
+function addItemToList(list, content) {
+    var textNode = document.createTextNode(content);
+    var listItem = document.createElement("li");
+    listItem.appendChild(textNode);
+    list.appendChild(listItem);
 }
 
-function listItem(list, json) {
-    for (var key in json) {
+/*
+function listItem(list, json)
+{
+    for (var key in json)
+    {
         var textNode = document.createTextNode(key + " " + obj[key] + " ");
         var listItem = document.createElement("LI");
         listItem.appendChild(textNode);
         list.appendChild(listItem);
     }
 }
-function test(message) {
-    document.getElementById("test").innerHTML = message;
-}
+*/
 
